@@ -4,7 +4,7 @@ use App\Models\{User,Ruangan,Booking};
 use App\Enums\StatusBooking;
 use function Pest\Laravel\actingAs; use function Pest\Laravel\post;
 
-it('creates pemesanan from booking and submits booking', function(){
+it('creates pemesanan from booking and moves booking to proses', function(){
     $admin = User::factory()->create()->assignRole('admin');
     $user = User::factory()->create()->assignRole('user');
     $ruang = Ruangan::factory()->create();
@@ -19,6 +19,5 @@ it('creates pemesanan from booking and submits booking', function(){
     ])->assertRedirect();
 
     $booking->refresh();
-    expect($booking->status)->toBe(StatusBooking::SUBMITTED);
+    expect($booking->status)->toBe(StatusBooking::PROSES);
 });
-

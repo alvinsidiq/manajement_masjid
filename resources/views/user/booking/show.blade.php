@@ -3,8 +3,9 @@
 @php
   $statusPalette = [
     'hold' => ['label' => 'Hold', 'bg' => 'bg-amber-100 text-amber-700 border-amber-200'],
-    'submitted' => ['label' => 'Menunggu', 'bg' => 'bg-sky-100 text-sky-700 border-sky-200'],
-    'diterima' => ['label' => 'Diterima', 'bg' => 'bg-emerald-100 text-emerald-700 border-emerald-200'],
+    'proses' => ['label' => 'Proses', 'bg' => 'bg-sky-100 text-sky-700 border-sky-200'],
+    'setuju' => ['label' => 'Setuju', 'bg' => 'bg-emerald-100 text-emerald-700 border-emerald-200'],
+    'tolak' => ['label' => 'Tolak', 'bg' => 'bg-rose-100 text-rose-700 border-rose-200'],
     'cancelled' => ['label' => 'Dibatalkan', 'bg' => 'bg-rose-100 text-rose-700 border-rose-200'],
     'expired' => ['label' => 'Expired', 'bg' => 'bg-gray-200 text-gray-600 border-gray-300'],
   ];
@@ -127,7 +128,7 @@
             <div class="rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-xs text-gray-600">Konfirmasi pemesanan belum tersedia atau booking sudah tidak dalam status hold.</div>
           @endif
 
-          @if(in_array($b->status->value,['hold','submitted']))
+          @if(in_array($b->status->value,['hold','proses']))
             <form method="post" action="{{ route('user.booking.update',$b) }}" onsubmit="return confirm('Batalkan booking ini?')">
               @csrf @method('PUT')
               <input type="hidden" name="aksi" value="cancel">

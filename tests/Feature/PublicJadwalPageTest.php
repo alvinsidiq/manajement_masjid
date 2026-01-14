@@ -31,7 +31,7 @@ it('shows combined jadwal and accepted pemesanan on the public calendar', functi
             'ruangan_id' => $ruangan->ruangan_id,
             'hari_tanggal' => $slotLocal->copy()->setTimezone('UTC'),
             'jam' => $slotLocal->format('H:i:s'),
-            'status' => 'submitted',
+            'status' => 'setuju',
         ]);
 
         Pemesanan::factory()->create([

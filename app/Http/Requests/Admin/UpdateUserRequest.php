@@ -17,7 +17,7 @@ class UpdateUserRequest extends FormRequest
             'password' => ['nullable','string','min:8'],
             'role' => ['required','in:admin,user,bendahara,takmir'],
             'is_active' => ['required','boolean'],
+            'is_verified' => ['nullable','boolean'],
         ];
     }
 }
-

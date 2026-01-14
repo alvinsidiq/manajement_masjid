@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Booking;
+use App\Models\Kegiatan;
+use App\Models\Pemesanan;
 use App\Models\Ruangan;
+use App\Enums\StatusPemesanan;
 
 class AdminDashboardController extends Controller
 {
@@ -14,8 +16,10 @@ class AdminDashboardController extends Controller
     {
         $stats = [
             'users'   => User::count(),
-            'booking' => Booking::count(),
             'ruangan' => Ruangan::count(),
+            'kegiatan' => Kegiatan::count(),
+            'pemesanan_waiting' => Pemesanan::where('status', StatusPemesanan::MENUNGGU)->count(),
+            'report_types' => 3,
         ];
 
         return view('admin.dashboard', compact('stats'));

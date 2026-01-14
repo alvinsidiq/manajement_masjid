@@ -17,6 +17,16 @@
     @error('jenis_kegiatan')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
   </div>
   <div>
+    <label class="block text-sm font-medium mb-1">Status Persetujuan</label>
+    @php($currentApproval = old('approval_status', $kegiatan->approval_status?->value ?? 'pending'))
+    <select name="approval_status" class="w-full border rounded px-3 py-2">
+      @foreach(['pending'=>'Menunggu persetujuan takmir','approved'=>'Disetujui','rejected'=>'Ditolak'] as $val=>$label)
+        <option value="{{ $val }}" @selected($currentApproval===$val)>{{ $label }}</option>
+      @endforeach
+    </select>
+    @error('approval_status')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
+  </div>
+  <div>
     <label class="block text-sm font-medium mb-1">Penanggung Jawab</label>
     <input name="penanggung_jawab" value="{{ old('penanggung_jawab',$kegiatan->penanggung_jawab) }}" class="w-full border rounded px-3 py-2">
     @error('penanggung_jawab')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror

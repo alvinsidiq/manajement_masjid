@@ -3,7 +3,7 @@
 use App\Models\{User,Ruangan,Pemesanan,Booking};
 use function Pest\Laravel\actingAs; use function Pest\Laravel\post;
 
-it('rejects pemesanan with reason and cancels booking', function(){
+it('rejects pemesanan with reason and marks booking tolak', function(){
     $admin = User::factory()->create()->assignRole('admin');
     $u = User::factory()->create()->assignRole('user');
     $r = Ruangan::factory()->create();
@@ -16,6 +16,5 @@ it('rejects pemesanan with reason and cancels booking', function(){
     $p->refresh(); $b->refresh();
     expect($p->status->value)->toBe('ditolak');
     expect($p->alasan_penolakan)->toBe('Bentrok jadwal');
-    expect($b->status->value)->toBe('cancelled');
+    expect($b->status->value)->toBe('tolak');
 });
-

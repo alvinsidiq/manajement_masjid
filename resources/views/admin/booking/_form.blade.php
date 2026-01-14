@@ -1,5 +1,13 @@
 @csrf
 @php($booking = $booking ?? null)
+@php($statusOptions = [
+  'hold' => 'Hold',
+  'proses' => 'Proses',
+  'setuju' => 'Setuju',
+  'tolak' => 'Tolak',
+  'expired' => 'Expired',
+  'cancelled' => 'Dibatalkan',
+])
 <div class="grid md:grid-cols-2 gap-4">
   <div>
     <label class="block text-sm font-medium">User</label>
@@ -34,8 +42,8 @@
   <div>
     <label class="block text-sm font-medium">Status</label>
     <select name="status" class="border rounded px-3 py-2 w-full">
-      @foreach(['hold','expired','submitted','cancelled'] as $s)
-        <option value="{{ $s }}" @selected(old('status', $booking->status->value ?? 'hold')==$s)>{{ ucfirst($s) }}</option>
+      @foreach($statusOptions as $s => $label)
+        <option value="{{ $s }}" @selected(old('status', $booking->status->value ?? 'hold')==$s)>{{ $label }}</option>
       @endforeach
     </select>
     @error('status')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
@@ -49,4 +57,3 @@
 <div class="pt-4">
   <button class="px-3 py-2 rounded bg-blue-600 text-white">Simpan</button>
 </div>
-

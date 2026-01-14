@@ -17,7 +17,7 @@ class BookingService
         $exists = Booking::query()
             ->when($ignoreId, fn($q)=>$q->where('booking_id','!=',$ignoreId))
             ->where('ruangan_id', $ruanganId)
-            ->whereIn('status', ['hold','submitted'])
+            ->whereIn('status', ['hold','proses','setuju'])
             ->where(function($w) use ($slot){
                 $w->where(function($q) use ($slot){
                     $q->whereDate('hari_tanggal', $slot->toDateString())
@@ -76,4 +76,3 @@ class BookingService
         return $b;
     }
 }
-

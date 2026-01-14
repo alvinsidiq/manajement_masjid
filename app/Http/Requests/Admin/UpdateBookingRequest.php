@@ -16,7 +16,7 @@ class UpdateBookingRequest extends FormRequest
             'ruangan_id' => ['required','integer','exists:ruangan,ruangan_id'],
             'hari_tanggal' => ['required','date'],
             'jam' => ['required','date_format:H:i'],
-            'status' => ['required','in:hold,expired,submitted,cancelled'],
+            'status' => ['required','in:hold,proses,setuju,tolak,expired,cancelled'],
             'hold_expires_at' => ['nullable','date','after:now'],
         ];
     }
@@ -38,4 +38,3 @@ class UpdateBookingRequest extends FormRequest
         });
     }
 }
-

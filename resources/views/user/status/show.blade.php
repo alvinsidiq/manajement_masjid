@@ -3,7 +3,9 @@
 @php
   $palette = [
     'hold' => 'bg-amber-100 text-amber-700 border-amber-200',
-    'submitted' => 'bg-sky-100 text-sky-700 border-sky-200',
+    'proses' => 'bg-sky-100 text-sky-700 border-sky-200',
+    'setuju' => 'bg-emerald-100 text-emerald-700 border-emerald-200',
+    'tolak' => 'bg-rose-100 text-rose-700 border-rose-200',
     'diterima' => 'bg-emerald-100 text-emerald-700 border-emerald-200',
     'dibatalkan' => 'bg-rose-100 text-rose-700 border-rose-200',
     'ditolak' => 'bg-rose-100 text-rose-700 border-rose-200',
@@ -40,4 +42,3 @@
   <div><a href="{{ route('user.status.index') }}" class="inline-flex items-center gap-2 px-3 py-2 rounded border bg-white hover:bg-gray-50">« Kembali ke Timeline</a></div>
 </div>
 @endsection
-

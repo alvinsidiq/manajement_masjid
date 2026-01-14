@@ -35,6 +35,14 @@
     </select>
     @error('is_active')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
   </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Verifikasi Email</label>
+    <select name="is_verified" class="w-full border rounded px-3 py-2">
+      <option value="1" @selected(old('is_verified')==='1')>Terverifikasi</option>
+      <option value="0" @selected(old('is_verified','0')==='0')>Belum Verifikasi</option>
+    </select>
+    @error('is_verified')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
+  </div>
 
   <div class="md:col-span-2 flex gap-2">
     <button class="px-4 py-2 rounded bg-blue-600 text-white">Simpan</button>
@@ -42,4 +50,3 @@
   </div>
 </form>
 @endsection
-

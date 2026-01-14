@@ -23,14 +23,14 @@ class CancelController extends Controller
     public function bookingConfirm(Booking $booking)
     {
         $this->authorize('view', $booking);
-        if (!in_array($booking->status->value, ['hold','submitted'])) abort(400,'Booking tidak dapat dibatalkan.');
+        if (!in_array($booking->status->value, ['hold','proses'])) abort(400,'Booking tidak dapat dibatalkan.');
         return view('user.booking.cancel', compact('booking'));
     }
 
     public function bookingProcess(CancelBookingRequest $request, Booking $booking)
     {
         $this->authorize('update', $booking);
-        if (!in_array($booking->status->value, ['hold','submitted'])) abort(400,'Booking tidak dapat dibatalkan.');
+        if (!in_array($booking->status->value, ['hold','proses'])) abort(400,'Booking tidak dapat dibatalkan.');
 
         DB::transaction(function() use ($booking,$request){
             $old = $booking->status->value;

@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('ruangan_id');
             $table->dateTime('hari_tanggal');
             $table->time('jam');
-            $table->enum('status', ['hold','expired','submitted','cancelled'])->default('hold')->index();
+            $table->enum('status', ['hold','proses','setuju','tolak','expired','cancelled'])->default('hold')->index();
             $table->dateTime('hold_expires_at')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
@@ -31,4 +31,3 @@ return new class extends Migration {
         Schema::dropIfExists('booking');
     }
 };
-

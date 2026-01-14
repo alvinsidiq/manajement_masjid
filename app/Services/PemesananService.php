@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\StatusPemesanan;
 use App\Enums\StatusBooking;
+use App\Enums\StatusKegiatan;
 use App\Models\{Pemesanan, Ruangan, Booking};
 use App\Notifications\{PemesananCreated, PemesananApproved, PemesananRejected, PemesananCancelled, PemesananCompleted};
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class PemesananService
             if (!empty($data['booking_id'])) {
                 $b = Booking::find($data['booking_id']);
                 if ($b && $b->status->value === StatusBooking::HOLD->value) {
-                    $b->status = StatusBooking::SUBMITTED; $b->save();
+                    $b->status = StatusBooking::PROSES; $b->save();
                 }
             }
             optional($p->user)->notify(new PemesananCreated($p));
@@ -32,6 +33,8 @@ class PemesananService
         if ($catatan) $p->catatan = $catatan;
         $p->alasan_penolakan = null;
         $p->save();
+        if ($p->booking) { $p->booking->status = StatusBooking::SETUJU; $p->booking->save(); }
+        $this->syncKegiatanApproval($p, StatusKegiatan::APPROVED);
         $this->updateSlotRuangan($p->ruangan);
         optional($p->user)->notify(new PemesananApproved($p));
         return $p;
@@ -43,9 +46,37 @@ class PemesananService
         $p->alasan_penolakan = $alasan;
         if ($catatan) $p->catatan = $catatan;
         $p->save();
-        if ($p->booking) { $p->booking->status = StatusBooking::CANCELLED; $p->booking->save(); }
+        if ($p->booking) { $p->booking->status = StatusBooking::TOLAK; $p->booking->save(); }
+        $this->syncKegiatanApproval($p, StatusKegiatan::REJECTED);
         optional($p->user)->notify(new PemesananRejected($p));
         return $p;
+    }
+
+    private function syncKegiatanApproval(Pemesanan $p, StatusKegiatan $targetStatus): void
+    {
+        if (!$p->jadwal_id) return;
+
+        $p->loadMissing('jadwal.kegiatan');
+        $kegiatan = $p->jadwal?->kegiatan;
+        if (!$kegiatan) return;
+
+        if ($targetStatus === StatusKegiatan::APPROVED) {
+            if ($kegiatan->approval_status !== StatusKegiatan::APPROVED) {
+                $kegiatan->approval_status = StatusKegiatan::APPROVED;
+                $kegiatan->save();
+            }
+            return;
+        }
+
+        if ($targetStatus === StatusKegiatan::REJECTED) {
+            $hasApproved = $kegiatan->jadwals()
+                ->whereHas('pemesanans', fn($q) => $q->where('status', StatusPemesanan::DITERIMA->value))
+                ->exists();
+            if (!$hasApproved && $kegiatan->approval_status !== StatusKegiatan::REJECTED) {
+                $kegiatan->approval_status = StatusKegiatan::REJECTED;
+                $kegiatan->save();
+            }
+        }
     }
 
     protected function updateSlotRuangan(Ruangan $ruangan): void

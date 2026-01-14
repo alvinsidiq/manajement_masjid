@@ -119,42 +119,9 @@
     </div>
 
     <div class="space-y-4">
-      @if($p->status->value==='menunggu_verifikasi')
-        <div class="p-4 rounded-xl border bg-yellow-50 shadow-sm space-y-3">
-          <div class="font-semibold text-gray-800">Konfirmasi</div>
-          <form method="post" action="{{ route('admin.pemesanan.approve',$p) }}" class="space-y-2">
-            @csrf
-            <label class="block text-sm font-medium">Catatan (opsional)</label>
-            <textarea name="catatan" class="w-full border rounded px-3 py-2" rows="2" placeholder="Catatan untuk pemesan"></textarea>
-            @error('catatan')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
-            <button class="w-full px-3 py-2 rounded bg-green-600 text-white">Setujui</button>
-          </form>
-          <form method="post" action="{{ route('admin.pemesanan.reject',$p) }}" class="space-y-2">
-            @csrf
-            <label class="block text-sm font-medium">Alasan Penolakan</label>
-            <textarea name="alasan_penolakan" class="w-full border rounded px-3 py-2" rows="2" required placeholder="Tuliskan alasan penolakan"></textarea>
-            @error('alasan_penolakan')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
-            <label class="block text-sm font-medium">Catatan (opsional)</label>
-            <textarea name="catatan" class="w-full border rounded px-3 py-2" rows="2" placeholder="Catatan tambahan"></textarea>
-            <button class="w-full px-3 py-2 rounded bg-red-600 text-white">Tolak</button>
-          </form>
-        </div>
-      @elseif($p->status->value==='diterima')
-        <div class="p-4 rounded-xl border bg-red-50 shadow-sm">
-          <div class="font-semibold mb-2 text-gray-800">Batalkan Pemesanan</div>
-          <form method="post" action="{{ route('admin.pemesanan.cancel',$p) }}" onsubmit="return confirm('Yakin batalkan pemesanan ini?');" class="space-y-2">
-            @csrf
-            <label class="block text-sm font-medium">Alasan Pembatalan</label>
-            <textarea name="alasan_pembatalan" class="w-full border rounded px-3 py-2" rows="2" required placeholder="Tuliskan alasan pembatalan"></textarea>
-            @error('alasan_pembatalan')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
-            <label class="block text-sm font-medium">Catatan (opsional)</label>
-            <textarea name="catatan" class="w-full border rounded px-3 py-2" rows="2" placeholder="Catatan tambahan"></textarea>
-            <button class="w-full px-3 py-2 rounded bg-red-600 text-white">Batalkan</button>
-          </form>
-        </div>
-      @else
-        <div class="p-4 rounded-xl border bg-gray-50 text-sm text-gray-700 shadow-sm">Tidak ada aksi yang tersedia untuk status ini.</div>
-      @endif
+      <div class="p-4 rounded-xl border bg-gray-50 text-sm text-gray-700 shadow-sm">
+        Halaman ini hanya menampilkan informasi. Persetujuan atau penolakan dilakukan oleh takmir.
+      </div>
     </div>
   </div>
 

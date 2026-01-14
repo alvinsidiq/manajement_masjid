@@ -14,20 +14,18 @@
 
     @role('admin')
       <div class="mt-2 text-xs uppercase text-gray-500 px-3">Admin</div>
-      <x-nav.sidebar-link :href="$safeLink('admin.dashboard')" :active="$is('admin.dashboard')">Ringkasan</x-nav.sidebar-link>
       <x-nav.sidebar-link :href="$safeLink('admin.users.index')" :active="$is('admin.users.*')">Kelola Pengguna</x-nav.sidebar-link>
       <x-nav.sidebar-link :href="$safeLink('admin.ruangan.index')" :active="$is('admin.ruangan.*')">Kelola Ruangan</x-nav.sidebar-link>
-      <x-nav.sidebar-link :href="$safeLink('admin.kegiatan.index')" :active="$is('admin.kegiatan.*')">Kelola Kegiatan (butuh persetujuan takmir)</x-nav.sidebar-link>
-      <x-nav.sidebar-link href="{{ route('admin.pemesanan.index',['status'=>'menunggu_verifikasi']) }}" :active="request()->routeIs('admin.pemesanan.*') && request('status')==='menunggu_verifikasi'">Konfirmasi Penyewaan Ruangan</x-nav.sidebar-link>
-      <x-nav.sidebar-link :href="$safeLink('admin.arsip.index')" :active="$is('admin.arsip.*')">Kelola Arsip</x-nav.sidebar-link>
-      <x-nav.sidebar-link href="{{ route('admin.reports.index', ['report'=>'pemesanan']) }}" :active="$is('admin.reports.*')">Kelola Laporan</x-nav.sidebar-link>
+      <x-nav.sidebar-link :href="$safeLink('admin.kegiatan.index')" :active="$is('admin.kegiatan.*')">Kelola Kegiatan</x-nav.sidebar-link>
+      <x-nav.sidebar-link href="{{ route('admin.pemesanan.index',['status'=>'menunggu_verifikasi']) }}" :active="request()->routeIs('admin.pemesanan.*') && request('status')==='menunggu_verifikasi'">Informasi Booking</x-nav.sidebar-link>
+      <x-nav.sidebar-link href="{{ route('admin.reports.index', ['report'=>'pemesanan']) }}" :active="$is('admin.reports.*')">Laporan</x-nav.sidebar-link>
     @endrole
 
     @role('bendahara')
       <div class="mt-2 text-xs uppercase text-gray-500 px-3">Bendahara</div>
       <x-nav.sidebar-link :href="$safeLink('bendahara.dashboard')" :active="$is('bendahara.dashboard')">Ringkasan</x-nav.sidebar-link>
       <x-nav.sidebar-link :href="$safeLink('bendahara.payment.create')" :active="$is('bendahara.payment.create')">Input Pembayaran</x-nav.sidebar-link>
-      <x-nav.sidebar-link :href="$safeLink('bendahara.laporan.index')" :active="$is('bendahara.laporan.*')">Laporan Transaksi</x-nav.sidebar-link>
+      <x-nav.sidebar-link :href="$safeLink('bendahara.payment.index')" :active="$is('bendahara.payment.*')">Laporan Transaksi</x-nav.sidebar-link>
       <x-nav.sidebar-link :href="$safeLink('bendahara.booking.index')" :active="$is('bendahara.booking.*')">Lihat Booking</x-nav.sidebar-link>
     @endrole
 

@@ -10,7 +10,7 @@ it('cancels user reservation and releases slot', function(){
     $b=Booking::factory()->create([
         'user_id'=>$u->user_id,'ruangan_id'=>$r->ruangan_id,
         'hari_tanggal'=>now('Asia/Jakarta')->addDays(2)->utc(),'jam'=>'10:30:00',
-        'status'=>StatusBooking::SUBMITTED->value
+        'status'=>StatusBooking::PROSES->value
     ]);
     $p=Pemesanan::factory()->create([
         'user_id'=>$u->user_id,'ruangan_id'=>$r->ruangan_id,'booking_id'=>$b->booking_id,
