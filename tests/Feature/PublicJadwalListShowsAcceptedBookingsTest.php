@@ -23,7 +23,7 @@ it('shows accepted reservation blocks in list view', function(){
         'ruangan_id' => $room->ruangan_id,
         'hari_tanggal' => $hari->copy()->setTimezone('UTC'),
         'jam' => $hari->format('H:i:s'),
-        'status' => 'submitted',
+        'status' => 'setuju',
     ]);
 
     Pemesanan::factory()->create([

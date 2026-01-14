@@ -34,9 +34,9 @@
       @php($kindColor = $isBooking ? 'bg-indigo-500' : 'bg-emerald-500')
       @php($statusClass = match(true){
         str_contains($st,'hold') => 'bg-amber-100 text-amber-700 border-amber-200',
-        str_contains($st,'menunggu') || str_contains($st,'submitted') => 'bg-sky-100 text-sky-700 border-sky-200',
-        str_contains($st,'diterima') => 'bg-emerald-100 text-emerald-700 border-emerald-200',
-        str_contains($st,'ditolak') || str_contains($st,'dibatalkan') || str_contains($st,'cancel') => 'bg-rose-100 text-rose-700 border-rose-200',
+        str_contains($st,'menunggu') || str_contains($st,'proses') => 'bg-sky-100 text-sky-700 border-sky-200',
+        str_contains($st,'diterima') || str_contains($st,'setuju') => 'bg-emerald-100 text-emerald-700 border-emerald-200',
+        str_contains($st,'ditolak') || str_contains($st,'tolak') || str_contains($st,'dibatalkan') || str_contains($st,'cancel') => 'bg-rose-100 text-rose-700 border-rose-200',
         str_contains($st,'expired') => 'bg-gray-200 text-gray-700 border-gray-300',
         default => 'bg-gray-100 text-gray-700 border-gray-200',
       })

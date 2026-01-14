@@ -25,19 +25,25 @@
     $statusOptions = [
       null => 'Semua',
       'hold' => 'Hold',
-      'submitted' => 'Menunggu',
+      'proses' => 'Proses',
+      'setuju' => 'Setuju',
+      'tolak' => 'Tolak',
       'cancelled' => 'Dibatalkan',
       'expired' => 'Expired',
     ];
     $statusColors = [
       'hold' => 'bg-amber-100 text-amber-700 border-amber-200',
-      'submitted' => 'bg-sky-100 text-sky-700 border-sky-200',
+      'proses' => 'bg-sky-100 text-sky-700 border-sky-200',
+      'setuju' => 'bg-emerald-100 text-emerald-700 border-emerald-200',
+      'tolak' => 'bg-rose-100 text-rose-700 border-rose-200',
       'cancelled' => 'bg-rose-100 text-rose-700 border-rose-200',
       'expired' => 'bg-gray-200 text-gray-700 border-gray-300',
     ];
     $statusLabels = [
       'hold' => 'Hold',
-      'submitted' => 'Menunggu',
+      'proses' => 'Proses',
+      'setuju' => 'Setuju',
+      'tolak' => 'Tolak',
       'cancelled' => 'Dibatalkan',
       'expired' => 'Expired',
     ];
@@ -118,7 +124,7 @@
 
             <div class="flex flex-wrap items-center gap-3">
               <a href="{{ route('user.booking.show',$b) }}" class="inline-flex items-center gap-2 rounded-full border border-indigo-200 px-4 py-2 text-xs font-semibold text-indigo-600 hover:border-indigo-300 hover:text-indigo-700">Lihat detail</a>
-              @if(in_array($b->status->value,['hold','submitted']))
+              @if(in_array($b->status->value,['hold','proses']))
                 <form method="post" action="{{ route('user.booking.update',$b) }}" onsubmit="return confirm('Batalkan booking ini?')">
                   @csrf @method('PUT')
                   <input type="hidden" name="aksi" value="cancel">

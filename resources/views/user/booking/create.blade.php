@@ -18,15 +18,25 @@
           <div class="space-y-2">
             <label class="text-sm font-medium text-gray-700">Ruangan</label>
             <div class="relative">
-              <select name="ruangan_id" class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" required>
-                <option value="">Pilih Ruangan</option>
-                @foreach($ruangan as $r)
-                  <option value="{{ $r->ruangan_id }}" @selected(old('ruangan_id', request('ruangan_id'))==$r->ruangan_id)>{{ $r->nama_ruangan }} — Rp {{ number_format($r->harga ?? 0,0,',','.') }}</option>
-                @endforeach
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-              </div>
+              @if($selectedRuangan)
+                <div class="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm">
+                  <div class="text-xs text-gray-500">Ruangan dipilih</div>
+                  <div class="font-semibold text-gray-900">{{ $selectedRuangan->nama_ruangan }}</div>
+                  <div class="mt-1 text-xs text-gray-500">Harga</div>
+                  <div class="font-semibold text-gray-900">Rp {{ number_format($selectedRuangan->harga ?? 0,0,',','.') }}</div>
+                </div>
+                <input type="hidden" name="ruangan_id" value="{{ $selectedRuangan->ruangan_id }}">
+              @else
+                <select name="ruangan_id" class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" required>
+                  <option value="">Pilih Ruangan</option>
+                  @foreach($ruangan as $r)
+                    <option value="{{ $r->ruangan_id }}" @selected(old('ruangan_id', request('ruangan_id'))==$r->ruangan_id)>{{ $r->nama_ruangan }} — Rp {{ number_format($r->harga ?? 0,0,',','.') }}</option>
+                  @endforeach
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                </div>
+              @endif
             </div>
             @error('ruangan_id')<div class="text-xs font-medium text-rose-600">{{ $message }}</div>@enderror
           </div>

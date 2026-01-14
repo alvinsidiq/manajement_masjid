@@ -16,6 +16,7 @@ class StoreUserRequest extends FormRequest
             'password' => ['required','string','min:8'],
             'role' => ['required','in:admin,user,bendahara,takmir'],
             'is_active' => ['required','boolean'],
+            'is_verified' => ['nullable','boolean'],
         ];
     }
 
@@ -29,4 +30,3 @@ class StoreUserRequest extends FormRequest
         ];
     }
 }
-

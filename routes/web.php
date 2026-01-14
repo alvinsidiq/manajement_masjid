@@ -149,8 +149,8 @@ Route::prefix('ruangan')->as('public.ruangan.')->group(function(){
     Route::get('{ruangan}', [\App\Http\Controllers\Frontend\RuanganController::class,'show'])->name('show');
 });
 
-// Publik: Kegiatan
-Route::prefix('kegiatan')->as('public.kegiatan.')->group(function(){
+// Publik: Kegiatan (khusus user login)
+Route::middleware(['auth','verified','active'])->prefix('kegiatan')->as('public.kegiatan.')->group(function(){
     Route::get('/', [\App\Http\Controllers\Frontend\KegiatanController::class,'index'])->name('index');
     Route::get('{kegiatan}', [\App\Http\Controllers\Frontend\KegiatanController::class,'show'])->name('show');
     Route::post('{kegiatan}/daftar', [\App\Http\Controllers\Frontend\KegiatanController::class,'daftar'])->name('daftar');

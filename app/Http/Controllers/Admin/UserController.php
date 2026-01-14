@@ -22,6 +22,7 @@ class UserController extends Controller
         $q   = $request->input('q');
         $role = $request->input('role');
         $status = $request->has('active') ? (bool) $request->input('active') : null;
+        $verified = $request->input('verified');
         $sort = $request->input('sort','created_at');
         $dir  = $request->input('dir','desc');
 
@@ -32,11 +33,13 @@ class UserController extends Controller
             }))
             ->when($role, fn($qq) => $qq->where('role',$role))
             ->when(!is_null($status), fn($qq) => $qq->where('is_active',$status))
+            ->when($verified === '1', fn($qq) => $qq->whereNotNull('email_verified_at'))
+            ->when($verified === '0', fn($qq) => $qq->whereNull('email_verified_at'))
             ->orderBy($sort, $dir)
             ->paginate(10)
             ->withQueryString();
 
-        return view('admin.users.index', compact('users','q','role','status','sort','dir'));
+        return view('admin.users.index', compact('users','q','role','status','verified','sort','dir'));
     }
 
     public function create()
@@ -47,8 +50,14 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $data = $request->validated();
+        $isVerified = array_key_exists('is_verified', $data) ? (bool) $data['is_verified'] : false;
+        unset($data['is_verified']);
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
+        if ($isVerified) {
+            $user->email_verified_at = now();
+            $user->save();
+        }
         $user->syncSpatieRoleFromEnum();
 
         return redirect()->route('admin.users.index')->with('status','Pengguna dibuat.');
@@ -67,12 +76,25 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $data = $request->validated();
+        $hasVerifiedInput = array_key_exists('is_verified', $data);
+        $isVerified = $hasVerifiedInput ? (bool) $data['is_verified'] : null;
+        unset($data['is_verified']);
         if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         } else {
             unset($data['password']);
         }
         $user->update($data);
+        if ($hasVerifiedInput) {
+            if ($isVerified) {
+                if (!$user->hasVerifiedEmail()) {
+                    $user->email_verified_at = now();
+                }
+            } else {
+                $user->email_verified_at = null;
+            }
+            $user->save();
+        }
         $user->syncSpatieRoleFromEnum();
 
         return redirect()->route('admin.users.index')->with('status','Pengguna diperbarui.');
@@ -84,4 +106,3 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('status','Pengguna dihapus.');
     }
 }
-

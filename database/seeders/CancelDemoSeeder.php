@@ -26,7 +26,7 @@ class CancelDemoSeeder extends Seeder
         $b = Booking::factory()->create([
             'user_id'=>$u->user_id,'ruangan_id'=>$r->ruangan_id,
             'hari_tanggal'=>now('Asia/Jakarta')->addDays(2)->utc(),'jam'=>'11:00:00',
-            'status'=>StatusBooking::SUBMITTED->value,
+            'status'=>StatusBooking::PROSES->value,
         ]);
         Pemesanan::factory()->create([
             'user_id'=>$u->user_id,'ruangan_id'=>$r->ruangan_id,

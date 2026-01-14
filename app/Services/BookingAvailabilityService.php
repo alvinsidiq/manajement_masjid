@@ -11,7 +11,7 @@ class BookingAvailabilityService
     /**
      * Periksa apakah slot (ruangan, hari_tanggal, jam) tersedia.
      * Menganggap jadwal konflik bila:
-     *  - Ada booking lain status HOLD/SUBMITTED pada slot yang sama dan belum expired
+     *  - Ada booking lain status HOLD/PROSES/SETUJU pada slot yang sama dan belum expired
      *  - Ada pemesanan DITERIMA/SELESAI pada tanggal/jam yang sama (booking/jadwal)
      */
     public function isAvailable(int $ruanganId, Carbon $tanggal, string $jam): bool
@@ -20,11 +20,13 @@ class BookingAvailabilityService
         // Cek booking aktif
         $existsBooking = Booking::query()
             ->where('ruangan_id', $ruanganId)
-            ->whereIn('status', [StatusBooking::HOLD->value, StatusBooking::SUBMITTED->value])
+            ->whereIn('status', [StatusBooking::HOLD->value, StatusBooking::PROSES->value, StatusBooking::SETUJU->value])
             ->where('hari_tanggal', $tanggal->clone()->utc())
             ->where('jam', $jam)
             ->where(function($q){
-                $q->whereNull('hold_expires_at')->orWhere('hold_expires_at','>', now());
+                $q->where('status','!=', StatusBooking::HOLD->value)
+                  ->orWhereNull('hold_expires_at')
+                  ->orWhere('hold_expires_at','>', now());
             })
             ->exists();
         if ($existsBooking) return false;

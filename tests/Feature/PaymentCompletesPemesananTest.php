@@ -19,7 +19,7 @@ it('marks pemesanan selesai after payment is paid and keeps the slot reserved', 
         'ruangan_id' => $ruangan->ruangan_id,
         'hari_tanggal' => $tanggal->clone()->utc(),
         'jam' => $jam,
-        'status' => 'submitted',
+        'status' => 'setuju',
         'hold_expires_at' => Carbon::now()->subMinutes(10),
     ]);
 

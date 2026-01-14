@@ -12,7 +12,7 @@ it('shows upcoming blocked slots from accepted reservations', function(){
         'ruangan_id'=>$room->ruangan_id,
         'hari_tanggal'=>$hari,
         'jam'=>$hari->format('H:i:s'),
-        'status'=>'submitted',
+        'status'=>'setuju',
     ]);
     Pemesanan::factory()->create([
         'user_id'=>$user->user_id,
@@ -27,4 +27,3 @@ it('shows upcoming blocked slots from accepted reservations', function(){
         ->assertSee('Rapat Remaja')
         ->assertSee($hari->timezone('Asia/Jakarta')->format('d M Y'));
 });
-

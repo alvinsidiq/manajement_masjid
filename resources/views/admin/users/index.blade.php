@@ -4,7 +4,7 @@
   <div class="mb-4 p-3 rounded bg-green-100 text-green-800">{{ session('status') }}</div>
 @endif
 <div class="bg-white p-4 rounded-xl shadow space-y-4">
-  <form method="get" class="grid md:grid-cols-5 gap-3">
+  <form method="get" class="grid md:grid-cols-7 gap-3">
     <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari username/email" class="border rounded px-3 py-2 md:col-span-2">
     <select name="role" class="border rounded px-3 py-2">
       <option value="">- Semua Peran -</option>
@@ -17,7 +17,12 @@
       <option value="1" @selected(request('active')==='1')>Aktif</option>
       <option value="0" @selected(request('active')==='0')>Nonaktif</option>
     </select>
-    <div class="flex gap-2">
+    <select name="verified" class="border rounded px-3 py-2">
+      <option value="">- Verifikasi -</option>
+      <option value="1" @selected(request('verified')==='1')>Terverifikasi</option>
+      <option value="0" @selected(request('verified')==='0')>Belum Verifikasi</option>
+    </select>
+    <div class="flex gap-2 md:col-span-2">
       <select name="sort" class="border rounded px-3 py-2">
         @foreach(['created_at'=>'Dibuat','username'=>'Username','email'=>'Email'] as $k=>$v)
           <option value="{{ $k }}" @selected(request('sort',$sort)===$k)>{{ $v }}</option>
@@ -43,6 +48,7 @@
           <th class="py-2 px-3">Email</th>
           <th class="py-2 px-3">Peran</th>
           <th class="py-2 px-3">Status</th>
+          <th class="py-2 px-3">Verifikasi</th>
           <th class="py-2 px-3">Aksi</th>
         </tr>
       </thead>
@@ -54,6 +60,11 @@
           <td class="py-2 px-3">{{ ucfirst($u->role) }}</td>
           <td class="py-2 px-3">
             <span class="px-2 py-1 rounded text-xs {{ $u->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-200 text-gray-800' }}">{{ $u->is_active ? 'Aktif' : 'Nonaktif' }}</span>
+          </td>
+          <td class="py-2 px-3">
+            <span class="px-2 py-1 rounded text-xs {{ $u->hasVerifiedEmail() ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' }}">
+              {{ $u->hasVerifiedEmail() ? 'Terverifikasi' : 'Belum Verifikasi' }}
+            </span>
           </td>
           <td class="py-2 px-3 flex gap-2">
             <a class="px-2 py-1 rounded bg-white border" href="{{ route('admin.users.show',$u) }}">Lihat</a>
@@ -74,4 +85,3 @@
   {{ $users->links() }}
 </div>
 @endsection
-

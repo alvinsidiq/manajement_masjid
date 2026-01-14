@@ -1,10 +1,13 @@
 <form method="get" class="grid md:grid-cols-12 gap-3 mb-4">
-  <input type="hidden" name="report" value="{{ $f['report'] ?? 'pemesanan' }}">
   <input type="text" name="q" value="{{ $f['q'] ?? '' }}" placeholder="Cari ..." class="border rounded px-3 py-2 md:col-span-3">
-  <select name="status" class="border rounded px-3 py-2 md:col-span-2">
-    <option value="">- Semua Status -</option>
-    @foreach(['menunggu_verifikasi','diterima','ditolak','dibatalkan','selesai'] as $s)
-      <option value="{{ $s }}" @selected(($f['status'] ?? '')===$s)>{{ str($s)->replace('_',' ')->title() }}</option>
+  <select name="report" class="border rounded px-3 py-2 md:col-span-2">
+    <option value="">- Jenis Laporan -</option>
+    @foreach([
+      'pemesanan' => 'Pemesanan',
+      'penggunaan-ruangan' => 'Penggunaan Ruangan',
+      'aktivitas-kegiatan' => 'Aktivitas Kegiatan',
+    ] as $key => $label)
+      <option value="{{ $key }}" @selected(($f['report'] ?? 'pemesanan')===$key)>{{ $label }}</option>
     @endforeach
   </select>
   <input type="number" name="ruangan_id" value="{{ $f['ruangan_id'] ?? '' }}" placeholder="Ruangan ID" class="border rounded px-3 py-2 md:col-span-2">
@@ -16,4 +19,3 @@
     <a href="{{ route('admin.reports.index', array_merge($f,['format'=>'excel'])) }}" class="px-3 py-2 rounded bg-green-600 text-white">Excel</a>
   </div>
 </form>
-

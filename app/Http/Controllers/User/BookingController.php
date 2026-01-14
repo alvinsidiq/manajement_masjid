@@ -35,10 +35,19 @@ class BookingController extends Controller
         return view('user.booking.rooms', compact('items','q'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $ruangan = Ruangan::where('status','aktif')->orderBy('nama_ruangan')->get(['ruangan_id','nama_ruangan']);
-        return view('user.booking.create', compact('ruangan'));
+        $selectedId = (int) ($request->input('ruangan_id') ?? old('ruangan_id'));
+        $selectedRuangan = null;
+        if ($selectedId) {
+            $selectedRuangan = Ruangan::where('status','aktif')
+                ->where('ruangan_id', $selectedId)
+                ->first(['ruangan_id','nama_ruangan','harga']);
+        }
+        $ruangan = Ruangan::where('status','aktif')
+            ->orderBy('nama_ruangan')
+            ->get(['ruangan_id','nama_ruangan','harga']);
+        return view('user.booking.create', compact('ruangan','selectedRuangan'));
     }
 
     public function store(StoreBookingRequest $request)
