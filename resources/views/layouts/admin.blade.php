@@ -12,11 +12,9 @@
 @php $isUserArea = request()->routeIs('user.*'); @endphp
 <div class="min-h-full flex">
 
-    @unless($isUserArea)
-        <aside class="w-64 bg-white border-r hidden md:block">
-            <x-app-sidebar />
-        </aside>
-    @endunless
+    <aside class="w-64 bg-white border-r hidden md:block">
+        <x-app-sidebar />
+    </aside>
 
     <div class="flex-1">
         <header class="bg-white border-b">

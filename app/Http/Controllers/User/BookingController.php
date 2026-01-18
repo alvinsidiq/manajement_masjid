@@ -92,7 +92,7 @@ class BookingController extends Controller
         if ($request->input('aksi') === 'cancel') {
             $booking->status = StatusBooking::CANCELLED;
             $booking->save();
-            return redirect()->route('user.booking.index')->with('status','Booking dibatalkan.');
+            return redirect()->route('user.booking.dashboard')->with('status','Booking dibatalkan.');
         }
         return back();
     }
@@ -100,6 +100,6 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         $booking->delete();
-        return redirect()->route('user.booking.index')->with('status','Booking dihapus.');
+        return redirect()->route('user.booking.dashboard')->with('status','Booking dihapus.');
     }
 }

@@ -8,9 +8,15 @@
 
 <div class="p-4 font-bold">Panel</div>
 <nav class="px-2 space-y-1">
-    @unless($isUserArea)
+    @if($isUserArea)
+      <div class="mt-2 text-xs uppercase text-gray-500 px-3">Pengguna</div>
+      <x-nav.sidebar-link :href="$safeLink('home')" :active="$is('home')">Halaman Utama</x-nav.sidebar-link>
+      <x-nav.sidebar-link :href="$safeLink('user.dashboard')" :active="$is('user.dashboard')">Dashboard</x-nav.sidebar-link>
+      <x-nav.sidebar-link :href="$safeLink('user.booking.dashboard')" :active="$is('user.booking.*')">Booking</x-nav.sidebar-link>
+      <x-nav.sidebar-link :href="$safeLink('user.profile.edit')" :active="$is('user.profile.*')">Profil</x-nav.sidebar-link>
+    @else
       <x-nav.sidebar-link :href="$safeLink('admin.dashboard')" :active="$is('admin.dashboard')" >Dashboard</x-nav.sidebar-link>
-    @endunless
+    @endif
 
     @role('admin')
       <div class="mt-2 text-xs uppercase text-gray-500 px-3">Admin</div>

@@ -10,6 +10,7 @@
     <div>
       <div class="text-xl font-semibold">{{ $ruangan->nama_ruangan }}</div>
       <div class="text-sm text-gray-700">Harga: Rp {{ number_format($ruangan->harga ?? 0,0,',','.') }}</div>
+      <div class="text-sm text-gray-700">Kapasitas: {{ number_format($ruangan->kapasitas ?? 0,0,',','.') }} orang</div>
       <div class="text-sm text-gray-600">Status: {{ ucfirst($ruangan->status) }}</div>
       @if($ruangan->fasilitas)
       <div class="mt-2 flex flex-wrap gap-1">

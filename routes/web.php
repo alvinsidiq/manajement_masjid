@@ -105,6 +105,7 @@ Route::middleware(['auth','verified','active','role:user|admin|bendahara|takmir'
     ->prefix('user')->as('user.')
     ->group(function(){
         Route::get('/dashboard', UserDashboardController::class)->name('dashboard');
+        Route::get('dashboard/booking', [\App\Http\Controllers\User\UserBookingDashboardController::class, 'index'])->name('booking.dashboard');
         Route::resource('settings', \App\Http\Controllers\User\UserSettingController::class)
             ->only(['index','edit','update','destroy','show']);
         Route::resource('ruangan', \App\Http\Controllers\User\BookingController::class)

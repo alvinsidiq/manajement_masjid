@@ -38,6 +38,7 @@
           <th class="py-2 px-3">Foto</th>
           <th class="py-2 px-3">Nama</th>
           <th class="py-2 px-3">Harga</th>
+          <th class="py-2 px-3">Kapasitas</th>
           <th class="py-2 px-3">Status</th>
           <th class="py-2 px-3">Fasilitas</th>
           <th class="py-2 px-3">Aksi</th>
@@ -47,17 +48,20 @@
       @forelse($ruangan as $r)
         <tr class="border-b">
           <td class="py-2 px-3">
-            @if($r->foto)
-              <img src="{{ asset('storage/'.$r->foto) }}" class="w-16 h-12 object-cover rounded" alt="{{ $r->nama_ruangan }}">
-            @else
-              <div class="w-16 h-12 bg-gray-200 rounded"></div>
-            @endif
+            <a href="{{ route('admin.ruangan.edit',$r) }}" class="inline-block" title="Ganti foto">
+              @if($r->foto)
+                <img src="{{ asset('storage/'.$r->foto) }}" class="w-16 h-12 object-cover rounded" alt="{{ $r->nama_ruangan }}">
+              @else
+                <div class="w-16 h-12 bg-gray-200 rounded"></div>
+              @endif
+            </a>
           </td>
           <td class="py-2 px-3">
             <a class="font-semibold hover:underline" href="{{ route('admin.ruangan.show',$r) }}">{{ $r->nama_ruangan }}</a>
             <div class="text-xs text-gray-500 line-clamp-1">{{ $r->deskripsi }}</div>
           </td>
           <td class="py-2 px-3">Rp {{ number_format($r->harga ?? 0,0,',','.') }}</td>
+          <td class="py-2 px-3">{{ number_format($r->kapasitas ?? 0,0,',','.') }}</td>
           <td class="py-2 px-3">
             <span class="px-2 py-1 rounded text-xs @class([
               'bg-green-100 text-green-800' => $r->status==='aktif',
@@ -84,7 +88,7 @@
           </td>
         </tr>
       @empty
-        <tr><td colspan="5" class="py-6 text-center text-gray-500">Belum ada data.</td></tr>
+        <tr><td colspan="7" class="py-6 text-center text-gray-500">Belum ada data.</td></tr>
       @endforelse
       </tbody>
     </table>

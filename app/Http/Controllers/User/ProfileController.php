@@ -22,13 +22,13 @@ class ProfileController extends Controller
     public function edit(Request $request)
     {
         $u = $request->user();
-        return view('user.profile.edit', compact('u'));
+        return view('user.profile.dashboard', compact('u'));
     }
 
     public function update(UpdateProfileRequest $request)
     {
         $u = $request->user();
-        $old = $u->only(['username','email','no_telephone']);
+        $old = $u->only(['username','nama_lengkap','nik','alamat_lengkap','email','no_telephone']);
 
         $emailChanged = $request->email !== $u->email;
         $u->fill($request->validated());
@@ -47,7 +47,7 @@ class ProfileController extends Controller
         // Audit log
         $this->audit->log('profile.update','User',$u->user_id,[
             'before' => $old,
-            'after' => $u->only(['username','email','no_telephone'])
+            'after' => $u->only(['username','nama_lengkap','nik','alamat_lengkap','email','no_telephone'])
         ], $u->user_id);
 
         return back()->with('status','Profil berhasil diperbarui'.($emailChanged ? ' — cek email untuk verifikasi.' : '.'));

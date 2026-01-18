@@ -1,9 +1,16 @@
 @extends('layouts.landing', ['pageTitle'=>'Detail Pemesanan'])
 @section('content')
 @php($p = $pemesanan)
-@php($paid = $p->payment?->status?->value === 'paid')
-@php($statusValue = optional($p->payment?->status)->value)
-@php($statusLabel = $statusValue === 'paid' ? 'Pembayaran selesai' : ($statusValue === 'pending' ? 'Menunggu pembayaran' : ($statusValue ?? 'Belum dibuat')))
+@php($payment = $p->payment)
+@php($statusValue = optional($payment?->status)->value)
+@php($gatewayValue = optional($payment?->gateway)->value)
+@php($statusPembayaran = $p->status_pembayaran ?? $payment?->status_pembayaran)
+@php($statusPembayaranNorm = $statusPembayaran ? strtoupper($statusPembayaran) : null)
+@php($paid = $statusValue === 'paid' || in_array($statusPembayaranNorm, ['PAID', 'SETTLED'], true))
+@php($isPending = $statusValue === 'pending' || $statusPembayaranNorm === 'PENDING')
+@php($isManualPending = $isPending && $gatewayValue === 'manual')
+@php($isAwaitingVerification = !$paid && $isPending && ($payment || $statusPembayaranNorm))
+@php($statusLabel = $paid ? 'Pembayaran selesai' : ($isAwaitingVerification ? 'Menunggu verifikasi bendahara' : ($isPending ? 'Menunggu pembayaran' : ($statusValue ?? 'Belum dibuat'))))
 @php($bookingDate = optional($p->booking?->hari_tanggal)?->timezone('Asia/Jakarta'))
 @php($bookingTime = $p->booking?->jam)
 <div class="max-w-4xl mx-auto px-4 py-10 space-y-6">
@@ -56,6 +63,10 @@
           {{ $bookingDate ? $bookingDate->format('d M Y') : 'tanggal yang dijadwalkan' }}
           @if($bookingTime) pukul {{ $bookingTime }}@endif
         </span>.
+      </div>
+    @elseif($isAwaitingVerification)
+      <div class="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+        Pembayaran Anda sudah dicatat dan sedang menunggu verifikasi bendahara.
       </div>
     @elseif($p->status->value === 'diterima')
       <div class="space-y-2">

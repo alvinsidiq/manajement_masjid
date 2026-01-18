@@ -13,6 +13,11 @@
     @error('harga')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
   </div>
   <div>
+    <label class="block text-sm font-medium mb-1">Kapasitas (orang)</label>
+    <input name="kapasitas" type="number" step="1" min="1" value="{{ old('kapasitas',$ruangan->kapasitas) }}" class="w-full border rounded px-3 py-2">
+    @error('kapasitas')<div class="text-red-600 text-sm mt-1">{{ $message }}</div>@enderror
+  </div>
+  <div>
     <label class="block text-sm font-medium mb-1">Status</label>
     <select name="status" class="w-full border rounded px-3 py-2">
       @foreach(['aktif','nonaktif','maintenance'] as $s)

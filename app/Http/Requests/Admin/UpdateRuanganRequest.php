@@ -13,6 +13,7 @@ class UpdateRuanganRequest extends FormRequest
         $id = $this->route('ruangan')->ruangan_id ?? null;
         return [
             'nama_ruangan' => ['required','string','max:120','unique:ruangan,nama_ruangan,'.$id.',ruangan_id'],
+            'kapasitas'    => ['required','integer','min:1'],
             'deskripsi'    => ['nullable','string'],
             'fasilitas'    => ['nullable'],
             'foto'         => ['nullable','image','mimes:jpg,jpeg,png,webp','max:2048'],

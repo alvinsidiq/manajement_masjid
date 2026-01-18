@@ -116,6 +116,6 @@ class PemesananController extends Controller
     {
         abort_unless($pemesanan->user_id === auth()->id(), 403);
         $pemesanan->loadMissing(['ruangan','booking','payment']);
-        return view('user.pemesanan.show', compact('pemesanan'));
+        return view('user.pemesanan.dashboard-show', compact('pemesanan'));
     }
 }

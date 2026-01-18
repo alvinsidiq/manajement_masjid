@@ -26,12 +26,6 @@
       'link' => route('admin.pemesanan.index', ['status' => 'menunggu_verifikasi']),
       'link_label' => 'Informasi booking',
     ],
-    [
-      'label' => 'Jenis Laporan',
-      'value' => $stats['report_types'] ?? 0,
-      'link' => route('admin.reports.index', ['report' => 'pemesanan']),
-      'link_label' => 'Buka laporan',
-    ],
   ];
 @endphp
 

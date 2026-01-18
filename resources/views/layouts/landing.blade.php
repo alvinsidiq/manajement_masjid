@@ -67,9 +67,8 @@
             <a class="{{ $landingNavBase }} {{ $landingNavActive('public.informasi.*') }}" href="{{ route('public.informasi.index') }}">Informasi</a>
             <a class="{{ $landingNavBase }} {{ $landingNavActive('public.kegiatan.*') }}" href="{{ route('public.kegiatan.index') }}">Kegiatan</a>
             @auth
+                <a class="{{ $landingNavBase }} {{ $landingNavActive('user.dashboard') }}" href="{{ route('user.dashboard') }}">Dashboard</a>
                 <a class="{{ $landingNavBase }} {{ $landingNavActive('user.booking.*') }}" href="{{ route('user.booking.index') }}">Daftar Ruangan</a>
-                <a class="{{ $landingNavBase }} {{ $landingNavActive('user.status.*') }}" href="{{ route('user.status.index') }}">Lihat Status</a>
-                <a class="{{ $landingNavBase }} {{ $landingNavActive('user.profile.*') }}" href="{{ route('user.profile.edit') }}">Profil</a>
                 <span class="text-sm text-white/80">{{ auth()->user()->username ?? auth()->user()->email }}</span>
                 <form method="POST" action="{{ route('logout') }}">
                   @csrf
@@ -86,9 +85,8 @@
                 <a class="{{ $landingNavBase }} {{ $landingNavActive('public.informasi.*') }}" href="{{ route('public.informasi.index') }}">Informasi</a>
                 <a class="{{ $landingNavBase }} {{ $landingNavActive('public.kegiatan.*') }}" href="{{ route('public.kegiatan.index') }}">Kegiatan</a>
                 @auth
+                    <a class="{{ $landingNavBase }} {{ $landingNavActive('user.dashboard') }}" href="{{ route('user.dashboard') }}">Dashboard</a>
                     <a class="{{ $landingNavBase }} {{ $landingNavActive('user.booking.*') }}" href="{{ route('user.booking.index') }}">Daftar Ruangan</a>
-                    <a class="{{ $landingNavBase }} {{ $landingNavActive('user.status.*') }}" href="{{ route('user.status.index') }}">Lihat Status</a>
-                    <a class="{{ $landingNavBase }} {{ $landingNavActive('user.profile.*') }}" href="{{ route('user.profile.edit') }}">Profil</a>
                     <div class="text-sm text-gray-700 px-2">{{ auth()->user()->username ?? auth()->user()->email }}</div>
                     <form method="POST" action="{{ route('logout') }}" class="px-2">
                       @csrf
