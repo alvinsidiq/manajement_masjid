@@ -52,7 +52,7 @@ class CancelController extends Controller
             $this->notif->sendGeneric($t->user_id, 'Booking #'.$booking->booking_id.' dibatalkan oleh '.$u->username.'.', \App\Enums\JenisReferensi::UMUM, $booking->booking_id);
         }
 
-        return redirect()->route('user.booking.index')->with('status','Booking dibatalkan.');
+        return redirect()->route('user.booking.dashboard')->with('status','Booking dibatalkan.');
     }
 
     // ===== PEMESANAN =====

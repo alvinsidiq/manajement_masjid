@@ -28,6 +28,16 @@
 
   <!-- List -->
   <div class="space-y-3">
+    @php
+      $statusLabels = [
+        'hold' => 'Menunggu Pemesanan',
+        'proses' => 'Proses',
+        'setuju' => 'Setuju',
+        'tolak' => 'Tolak',
+        'cancelled' => 'Dibatalkan',
+        'expired' => 'Expired',
+      ];
+    @endphp
     @forelse($items as $it)
       @php($st = strtolower($it['status']))
       @php($isBooking = $it['kind']==='booking')
@@ -47,7 +57,7 @@
           <div class="flex-1">
             <div class="flex items-center justify-between gap-2">
               <a href="{{ route('user.status.show', $it['kind'].'-'.$it['id']) }}" class="font-semibold text-gray-900 hover:text-indigo-700">{{ $it['title'] }}</a>
-              <span class="text-xs px-2 py-0.5 rounded-full border {{ $statusClass }}">{{ Str::headline($it['status']) }}</span>
+              <span class="text-xs px-2 py-0.5 rounded-full border {{ $statusClass }}">{{ $statusLabels[$st] ?? Str::headline($it['status']) }}</span>
             </div>
             <div class="mt-1 text-xs text-gray-500">Waktu: {{ $it['when'] ?: '-' }}</div>
             @if($it['note'])<div class="mt-1 text-sm text-gray-700">{{ $it['note'] }}</div>@endif

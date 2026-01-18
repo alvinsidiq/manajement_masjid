@@ -22,6 +22,7 @@ class RuanganFactory extends Factory
         ];
         return [
             'nama_ruangan' => $nama,
+            'kapasitas' => fake()->numberBetween(20, 300),
             'deskripsi' => fake('id_ID')->paragraph(),
             'fasilitas' => $fasilitas,
             'foto' => fake()->randomElement($sampleFotos),

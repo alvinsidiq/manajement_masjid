@@ -78,10 +78,25 @@
               @endif
             </p>
           </div>
+          <div class="space-y-2">
+            <label class="text-sm font-medium text-gray-700 dark:text-gray-200">Nama Lengkap</label>
+            <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap', $u->nama_lengkap) }}" class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100" placeholder="Contoh: Ahmad Fauzi">
+            @error('nama_lengkap')<p class="text-xs font-medium text-rose-600">{{ $message }}</p>@enderror
+          </div>
+          <div class="space-y-2">
+            <label class="text-sm font-medium text-gray-700 dark:text-gray-200">NIK</label>
+            <input type="text" name="nik" value="{{ old('nik', $u->nik) }}" class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100" placeholder="16 digit angka">
+            @error('nik')<p class="text-xs font-medium text-rose-600">{{ $message }}</p>@enderror
+          </div>
           <div class="md:col-span-2 space-y-2">
-            <label class="text-sm font-medium text-gray-700 dark:text-gray-200">No. Telepon</label>
+            <label class="text-sm font-medium text-gray-700 dark:text-gray-200">No. HP</label>
             <input type="text" name="no_telephone" value="{{ old('no_telephone', $u->no_telephone) }}" class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100" placeholder="Contoh: +62 812-3456-7890">
             @error('no_telephone')<p class="text-xs font-medium text-rose-600">{{ $message }}</p>@enderror
+          </div>
+          <div class="md:col-span-2 space-y-2">
+            <label class="text-sm font-medium text-gray-700 dark:text-gray-200">Alamat Lengkap</label>
+            <textarea name="alamat_lengkap" rows="3" class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100" placeholder="Tuliskan alamat lengkap sesuai domisili">{{ old('alamat_lengkap', $u->alamat_lengkap) }}</textarea>
+            @error('alamat_lengkap')<p class="text-xs font-medium text-rose-600">{{ $message }}</p>@enderror
           </div>
           <div class="md:col-span-2 flex flex-wrap items-center justify-between gap-3">
             <p class="text-xs text-slate-500">Pastikan data sesuai untuk mempermudah konfirmasi booking.</p>
@@ -144,12 +159,24 @@
         <h2 class="text-sm font-semibold text-slate-700">Informasi akun</h2>
         <dl class="mt-4 space-y-3 text-xs text-slate-600">
           <div>
+            <dt class="uppercase tracking-wide text-gray-400">Nama lengkap</dt>
+            <dd class="font-medium">{{ $u->nama_lengkap ?: 'Belum diisi' }}</dd>
+          </div>
+          <div>
+            <dt class="uppercase tracking-wide text-gray-400">NIK</dt>
+            <dd class="font-medium">{{ $u->nik ?: 'Belum diisi' }}</dd>
+          </div>
+          <div>
             <dt class="uppercase tracking-wide text-gray-400">Email saat ini</dt>
             <dd class="font-medium">{{ $u->email }}</dd>
           </div>
           <div>
-            <dt class="uppercase tracking-wide text-gray-400">Nomor telepon</dt>
+            <dt class="uppercase tracking-wide text-gray-400">No. HP</dt>
             <dd class="font-medium">{{ $u->no_telephone ?: 'Belum diisi' }}</dd>
+          </div>
+          <div>
+            <dt class="uppercase tracking-wide text-gray-400">Alamat lengkap</dt>
+            <dd class="font-medium">{{ $u->alamat_lengkap ?: 'Belum diisi' }}</dd>
           </div>
           <div>
             <dt class="uppercase tracking-wide text-gray-400">Terdaftar sejak</dt>

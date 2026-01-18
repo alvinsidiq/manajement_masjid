@@ -11,6 +11,14 @@
     'ditolak' => 'bg-rose-100 text-rose-700 border-rose-200',
     'expired' => 'bg-gray-200 text-gray-700 border-gray-300',
   ];
+  $statusLabels = [
+    'hold' => 'Menunggu Pemesanan',
+    'proses' => 'Proses',
+    'setuju' => 'Setuju',
+    'tolak' => 'Tolak',
+    'cancelled' => 'Dibatalkan',
+    'expired' => 'Expired',
+  ];
 @endphp
 <div class="max-w-3xl mx-auto px-4 py-10 space-y-4">
   @if($kind==='booking')
@@ -18,7 +26,7 @@
     <div class="rounded-2xl border bg-white p-6 shadow-sm space-y-2">
       <div class="flex items-center justify-between">
         <div class="text-lg font-semibold">Booking #{{ $booking->booking_id }}</div>
-        <span class="text-xs px-2 py-0.5 rounded-full border {{ $palette[$st] ?? 'bg-gray-100 text-gray-700 border-gray-200' }}">{{ Str::headline($booking->status->value) }}</span>
+        <span class="text-xs px-2 py-0.5 rounded-full border {{ $palette[$st] ?? 'bg-gray-100 text-gray-700 border-gray-200' }}">{{ $statusLabels[$st] ?? Str::headline($booking->status->value) }}</span>
       </div>
       <div>Ruangan: <span class="font-medium">{{ $booking->ruangan->nama_ruangan ?? '-' }}</span></div>
       <div>Tanggal: {{ $booking->hari_tanggal->timezone('Asia/Jakarta')->format('d M Y') }} &middot; Jam: {{ Str::substr($booking->jam,0,5) }}</div>

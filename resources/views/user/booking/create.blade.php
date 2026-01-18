@@ -6,8 +6,8 @@
       <div class="mb-8 flex items-start justify-between gap-4">
         <div>
           <p class="text-xs uppercase tracking-[0.3em] text-indigo-500">Langkah 1 dari 2</p>
-          <h2 class="mt-2 text-2xl font-semibold text-gray-900">Tahan slot ruangan</h2>
-          <p class="mt-2 text-sm text-gray-500">Isi detail acara Anda. Slot yang tersedia akan di-hold selama 45 menit sebelum perlu dikonfirmasi melalui pemesanan.</p>
+          <h2 class="mt-2 text-2xl font-semibold text-gray-900">Booking langsung</h2>
+          <p class="mt-2 text-sm text-gray-500">Isi detail acara Anda untuk membuat booking. Slot akan dikunci selama 45 menit sebelum perlu dikonfirmasi melalui pemesanan.</p>
         </div>
         <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">1</span>
       </div>
@@ -58,9 +58,9 @@
         </div>
 
         <div class="flex flex-wrap items-center justify-between gap-3">
-          <p class="text-xs text-gray-500">Dengan menekan tombol ini, slot akan ditahan sementara dan perlu dikonfirmasi di tahap berikutnya.</p>
+          <p class="text-xs text-gray-500">Dengan menekan tombol ini, booking dibuat dan slot terkunci sementara sebelum dikonfirmasi di tahap berikutnya.</p>
           <button class="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500">
-            Tahan Slot Sekarang
+            Booking Langsung
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </button>
         </div>
@@ -72,7 +72,7 @@
         <h3 class="text-sm font-semibold text-indigo-700">Tips booking efektif</h3>
         <ul class="mt-3 space-y-2 text-xs text-indigo-700/90">
           <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-indigo-400"></span>Pilih tanggal minimal H+1 agar tak berbenturan dengan jadwal berjalan.</li>
-          <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-indigo-400"></span>Hold berlaku 45 menit, jadi siapkan data pemesanan sebelum waktu tersebut.</li>
+          <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-indigo-400"></span>Booking terkunci 45 menit, siapkan data pemesanan sebelum waktunya berakhir.</li>
           <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-indigo-400"></span>Gunakan kolom tujuan untuk menjelaskan kebutuhan Anda secara singkat.</li>
         </ul>
       </div>
@@ -83,7 +83,7 @@
         <div class="mt-4 space-y-2 text-xs text-gray-600">
           <div class="flex items-center gap-2">
             <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">1</span>
-            <span>Hold slot (halaman ini)</span>
+            <span>Booking langsung (halaman ini)</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">2</span>

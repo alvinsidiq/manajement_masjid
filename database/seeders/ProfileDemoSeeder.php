@@ -16,6 +16,9 @@ class ProfileDemoSeeder extends Seeder
                 'username' => 'userdemo',
                 'email' => 'user@masjid.test',
                 'password' => Hash::make('password'),
+                'nama_lengkap' => 'Ahmad User Demo',
+                'nik' => '3201123409876543',
+                'alamat_lengkap' => 'Jl. Melati No. 12, RT 04/RW 02, Bandung',
                 'no_telephone' => '+62 812-1111-2222',
             ]);
             $u->assignRole('user');

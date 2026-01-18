@@ -14,6 +14,9 @@ class UpdateProfileRequest extends FormRequest
         $userId = (int) auth()->user()->user_id;
         return [
             'username' => ['required','string','min:3','max:50', Rule::unique('users','username')->ignore($userId, 'user_id')],
+            'nama_lengkap' => ['nullable','string','max:150'],
+            'nik' => ['nullable','string','regex:/^[0-9]{16}$/'],
+            'alamat_lengkap' => ['nullable','string','max:500'],
             'email' => ['required','email', Rule::unique('users','email')->ignore($userId, 'user_id')],
             'no_telephone' => ['nullable','string','max:25','regex:/^\+?[0-9\- ]{8,20}$/'],
         ];
@@ -23,6 +26,7 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'username.required' => 'Username wajib diisi.',
+            'nik.regex' => 'NIK harus 16 digit angka.',
             'email.email' => 'Format email tidak valid.',
             'no_telephone.regex' => 'Nomor telepon hanya boleh angka, spasi, tanda + atau -.',
         ];

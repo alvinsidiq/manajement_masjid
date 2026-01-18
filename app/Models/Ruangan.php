@@ -16,12 +16,13 @@ class Ruangan extends Model
     protected $keyType = 'int';
 
     protected $fillable = [
-        'nama_ruangan','deskripsi','fasilitas','foto','status','harga'
+        'nama_ruangan','kapasitas','deskripsi','fasilitas','foto','status','harga'
     ];
 
     protected $casts = [
         'fasilitas' => 'array',
         'harga' => 'decimal:2',
+        'kapasitas' => 'integer',
     ];
 
     public function pemesanans() { return $this->hasMany(Pemesanan::class, 'ruangan_id'); }

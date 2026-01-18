@@ -12,6 +12,7 @@ class RuanganSeeder extends Seeder
         $data = [
             [
                 'nama_ruangan' => 'Aula Utama',
+                'kapasitas' => 300,
                 'deskripsi' => 'Ruang utama untuk khutbah, kajian umum, dan acara besar.',
                 'fasilitas' => ['AC','Karpet','Sound System','Proyektor'],
                 'status' => 'aktif',
@@ -20,6 +21,7 @@ class RuanganSeeder extends Seeder
             ],
             [
                 'nama_ruangan' => 'Ruang Serbaguna',
+                'kapasitas' => 120,
                 'deskripsi' => 'Cocok untuk rapat kecil, pelatihan, dan pertemuan komunitas.',
                 'fasilitas' => ['Kipas','Karpet','Wifi'],
                 'status' => 'aktif',
@@ -28,6 +30,7 @@ class RuanganSeeder extends Seeder
             ],
             [
                 'nama_ruangan' => 'Perpustakaan',
+                'kapasitas' => 60,
                 'deskripsi' => 'Koleksi buku-buku islami dan tempat baca.',
                 'fasilitas' => ['Kipas','Wifi'],
                 'status' => 'maintenance',
@@ -36,6 +39,7 @@ class RuanganSeeder extends Seeder
             ],
             [
                 'nama_ruangan' => 'Kelas TPA',
+                'kapasitas' => 40,
                 'deskripsi' => 'Ruang belajar anak-anak dengan meja kecil.',
                 'fasilitas' => ['Kipas','Karpet','Papan Tulis'],
                 'status' => 'aktif',
@@ -44,6 +48,7 @@ class RuanganSeeder extends Seeder
             ],
             [
                 'nama_ruangan' => 'Serambi Depan',
+                'kapasitas' => 80,
                 'deskripsi' => 'Area semi-outdoor untuk istirahat jamaah.',
                 'fasilitas' => ['Karpet'],
                 'status' => 'nonaktif',

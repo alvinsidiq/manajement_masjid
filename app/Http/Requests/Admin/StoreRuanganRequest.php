@@ -12,6 +12,7 @@ class StoreRuanganRequest extends FormRequest
     {
         return [
             'nama_ruangan' => ['required','string','max:120','unique:ruangan,nama_ruangan'],
+            'kapasitas'    => ['required','integer','min:1'],
             'deskripsi'    => ['nullable','string'],
             'fasilitas'    => ['nullable'],
             'foto'         => ['nullable','image','mimes:jpg,jpeg,png,webp','max:2048'],
@@ -25,6 +26,8 @@ class StoreRuanganRequest extends FormRequest
         return [
             'nama_ruangan.required' => 'Nama ruangan wajib diisi.',
             'nama_ruangan.unique'   => 'Nama ruangan sudah ada.',
+            'kapasitas.required'   => 'Kapasitas wajib diisi.',
+            'kapasitas.min'        => 'Kapasitas minimal 1.',
             'foto.image'            => 'File foto harus berupa gambar.',
             'status.in'             => 'Status tidak valid.',
         ];

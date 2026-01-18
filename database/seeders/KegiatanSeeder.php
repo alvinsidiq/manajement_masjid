@@ -16,6 +16,7 @@ class KegiatanSeeder extends Seeder
                 'jenis_kegiatan' => 'rutin',
                 'penanggung_jawab' => 'Ust. Ahmad',
                 'no_telephone' => '+628123456789',
+                'foto' => 'kegiatan/kajian-rutin-ahad-pagi-69202a906dcb8.png',
             ],
             [
                 'nama_kegiatan' => 'TPA Sore',
@@ -23,6 +24,7 @@ class KegiatanSeeder extends Seeder
                 'jenis_kegiatan' => 'rutin',
                 'penanggung_jawab' => 'Ustadzah Siti',
                 'no_telephone' => '+628987654321',
+                'foto' => 'kegiatan/tpa-sore-69202ac125da6.png',
             ],
             [
                 'nama_kegiatan' => 'Bakti Sosial',
@@ -30,6 +32,7 @@ class KegiatanSeeder extends Seeder
                 'jenis_kegiatan' => 'khusus',
                 'penanggung_jawab' => 'Panitia Sosial',
                 'no_telephone' => '+6282233445566',
+                'foto' => 'kegiatan/kajian-rutin-ahad-pagi-69202ab438d01.png',
             ],
             [
                 'nama_kegiatan' => 'Pelatihan Mualaf',
@@ -37,6 +40,7 @@ class KegiatanSeeder extends Seeder
                 'jenis_kegiatan' => 'berkala',
                 'penanggung_jawab' => 'Tim Dakwah',
                 'no_telephone' => '+628112223334',
+                'foto' => 'kegiatan/tpa-sore-694e983c44c1d.png',
             ],
         ];
 
@@ -50,4 +54,3 @@ class KegiatanSeeder extends Seeder
         Kegiatan::factory()->count(10)->create();
     }
 }
-

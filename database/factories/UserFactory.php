@@ -26,11 +26,15 @@ class UserFactory extends Factory
         $faker = fake('id_ID');
         return [
             'username' => $faker->userName(),
+            'nama_lengkap' => $faker->name(),
+            'nik' => $faker->numerify('################'),
+            'alamat_lengkap' => $faker->address(),
             'email' => $faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'role' => fake()->randomElement(['user','admin','bendahara','takmir']),
             'is_active' => true,
+            'no_telephone' => $faker->numerify('+62 8##-####-####'),
             'remember_token' => Str::random(10),
         ];
     }

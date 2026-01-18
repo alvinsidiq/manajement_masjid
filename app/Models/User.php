@@ -20,7 +20,15 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $keyType = 'int';
 
     protected $fillable = [
-        'username', 'email', 'password', 'role', 'is_active',
+        'username',
+        'nama_lengkap',
+        'nik',
+        'alamat_lengkap',
+        'no_telephone',
+        'email',
+        'password',
+        'role',
+        'is_active',
     ];
 
     protected $hidden = ['password','remember_token'];
